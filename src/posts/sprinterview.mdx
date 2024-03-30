@@ -1,0 +1,158 @@
+export const metadata = {
+  author: "Jason Howmans",
+  date: "16 May 2023",
+  cover: "https://dl.nosaj.io/posts/ai-interviews/ai_interviews_cover.png",
+  summary: "How I built an AI interview startup from zero to one.",
+};
+
+In March 2023 I started hacking on an idea to use LLMs to generate interview plans for recruiters. That’s how it started.
+
+Last night I shipped an automated AI interview product named Sprinterview.
+
+This post will break down the steps taken to build Sprinterview, mistakes I made, and what’s next.
+
+> Before we dive in, I want to say a big thank you to the friends and family who patiently gave their time and advice for this project: Adam Shi, Tiffany Little, Elliot O’Connor, Millian Gehrer, Zara Yaqoob, Francesco Agosti, Jack Bridger, Shums Kassam, and my Mom and Dad. You’re all awesome.
+
+## The problem
+
+Sourcing and screening is one of the hardest problems in recruitment. The reason it’s hard is because it’s fundamentally limited by human bandwidth. Even when a recruiter follows the most optimized process possible, they will eventually bump against the physical limit of time available in the day.
+
+My last job was with a recruitment startup called Frontier, and we spent a lot of time understanding the raw principles of sourcing and screening. We learned from our customers that high volume screening is often broken into three parts:
+
+1.  Attract candidates.
+2.  Shortlist candidates.
+3.  Screening interview.
+
+Each step involves a different process, which are usually:
+
+1.  **Attract candidates** - advertise the job where candidates will find it.
+2.  **Shortlist candidates** - convince candidates to fill out a job application form, capture data in an ATS, review applications, and create a shortlist.
+3.  **Screening interview** - follow up with shortlisted candidates and arrange a screening call.
+
+As you can tell, the screening process demands a lot of human input at every stage. Technology doesn’t seem to lower the time cost for recruiters. It just moves it around. The cost still nets out higher for the recruiter.
+
+Recruiters still have to stay on top of inbound applications, pattern match to find good candidates, and then screen them to validate. All of this takes time and effort that scales up with volume.
+
+The secondary cost to the recruiter is candidate drop off. Candidate drop off is a function of time and steps. It happens when candidates are asked to wait for an unknown amount of time and complete an unknown number of steps before they get any signal themselves.
+
+With sourcing and screening being so costly to candidates and recruiters alike, it’s clear there’s ample room to improve the hiring process for both sides. Not only that, but doing so could be incredibly valuable to a business.
+
+## The prototype
+
+It was sometime in mid March 2023 at 1am. I was reflecting on an area of recruitment that I’ve always found tedious: pre-interview candidate research.
+
+With LLMs in the back of my mind, it occurred to me that candidate research can be reduced to a pattern matching exercise assuming the information is available. I needed to know if this was true so I spent the next day validating the hypothesis.
+
+### ChatGPT to the rescue
+
+To validate “can an LLM do X” is shockingly trivial with ChatGPT.
+
+I was able to validate my assumption that an LLM can do the heavy lifting of interview preparation by designing a prompt that contained some basic instructions, and pasting different combinations of job description and candidate résumés.
+
+![ChatGPT prototype](https://dl.nosaj.io/posts/ai-interviews/chatgpt-prototype.png)
+
+With some tuning, I was able to get ChatGPT to notice gaps and correlations between the résumé and job requirements and then design questions around them.
+
+But can it be automated?
+
+### Automated interview prep
+
+To create an automated interview preparation application I spent an evening condensing my ChatGPT experiment into a command line tool.
+
+![Command Line Prototype](https://dl.nosaj.io/posts/ai-interviews/cli-prototype.png)
+
+Using the GPT-3.5 API, the CLI tool I built took a job description, LinkedIn profile, and interview time limit as inputs. It then returned a JSON formatted set of questions for an interviewer to ask when screening the provided candidate.
+
+I demoed the CLI tool to some friends and asked for real opinions. These were the highlights:
+
+- It’s cool but how do I know I can trust it?
+- I’d use it for high volume.
+- If I could use it from LinkedIn I would pay for it.
+- I definitely wouldn’t use it for high skilled roles.
+- Isn’t it unfair to ask different questions to different candidates?
+
+The feedback was exactly what I needed. Although the CLI solution was a shitty first draft, people had energy for the value proposition.
+
+At this point it was clear there is value in exploring the combination of LLMs and interview screening. Could this be it? I don’t know, but let’s build an MVP to find out.
+
+## MVP 1.0 - Interview preparation
+
+In the weeks following the CLI prototype, I designed and built a NextJS app as a simple MVP interview preparation application.
+
+![Onboarding screen for the first MVP](https://dl.nosaj.io/posts/ai-interviews/app_setup.png)
+
+The core LLM piece of the app was easy to port over from the CLI tool I made the week before. But I was unprepared for the difficult task of scraping content from LinkedIn.
+
+Scraping slowed the app down significantly because it meant running a headless browser to fully automate the process, which I saw as important. So I continued to hack together a secondary background service that could do all the heavy lifts that were scraping and generating content.
+
+I was able to solve the LinkedIn scraping problem by storing my authentication cookies securely in a database and injecting them into a headless browser session to do the scraping. Then I used GPT to clean up the text, and finally run the preparation operation.
+
+![Final questions for the first MVP](https://dl.nosaj.io/posts/ai-interviews/app_questions.png)
+
+Automation took me longer than planned because I was working against anti-scraping measures. But when it worked it was magical! I saw this could have saved me a lot of work in the past. What more could I ask for?
+
+I booked more customer development calls with friends and founders in the recruitment space and demoed the MVP to them. Here’s the highlights from those conversations:
+
+- Might be useful for people new to recruitment, but not the pros.
+- I’d like it to ask the questions too.
+- What we really need is a deterministic way to know what good looks like.
+- Can it do followup questions in real time?
+- I’d use this for customer development instead of recruitment.
+
+With this round of demos the excitement was higher. People had more ideas and were translating what they saw to their own problems. I saw this as signal. But was this MVP really solving a problem or just playing close to the solution?
+
+As I went over feedback and explored ideas I arrived back at an idea I’d been trying to avoid: fully autonomous AI interviews. Why was I avoiding AI interviews? I didn’t see the value; I saw it as a gimmick (which might still be accurate), and didn’t think there was a problem AI interviews would meaningfully solve.
+
+What finally drove me into the warm embrace of automated interviews was the thought that this would be really cool if it was done well, and it felt naughty to automate a recruiter. So I went to bed excited for what was next.
+
+## MVP 2.0 – Autonomous AI interviews
+
+April 21st 2023, sometime in the morning. I spun up a NextJS app with LangChain and TailwindCSS. This was going to be a one day build so I turned on GitHub CoPilot and made a promise to myself that I wouldn’t get distracted.
+
+By 4pm I was sitting in a chatroom with “AI Interviewer” answering questions about my experience with Software Development. When I gave vague or bad answers the interviewer just moved on. I adjusted the prompt and then “AI Interviewer” asked me a followup question. There it was, that magical feeling again.
+
+![AI Interviewer](https://dl.nosaj.io/posts/ai-interviews/ai_interviewer.png)
+
+By the time evening rolled around I had designed a data model and basic process to add new interviews for “AI Interviewer” to conduct.
+
+I got my girlfriend to sit for the first full interview at 11pm. The UI was terrible, “AI Interviewer” wasn’t always professional, but it worked! That was enough for one day.
+
+![Tiffany demoing AI Interviewer](https://dl.nosaj.io/posts/ai-interviews/tiffany.png)
+
+The following days I demoed the chat with “AI Interviewer” to a number of different people. Energy was even higher, and I could see there was light at the end of the tunnel. But there was just one problem…
+
+### Text interviews, really?
+
+Text sucks. In fact, the reason recruiters need to screen candidates after they’ve already applied for a job is because text is low signal.
+
+What if “AI Interviewer” could understand what a candidate says and respond in real time? What if the candidate’s answers could be analyzed, the audio saved, and a similar outcome as a screening call could be reached in less time and with fewer steps?
+
+Imagine if candidates could apply for jobs by doing a 5 minute AI screening call with “AI Interviewer” while doing housework instead of the alternative of filling out application forms and praying. What would this mean for candidates and recruiters?
+
+### Speak to answer
+
+The interview application was reworked once again to achieve the spoken screening call process by paying even more money to OpenAI via the Whisper API. I built a new service named “Fluent” that transcribes messages and keeps the audio ready for automated screening.
+
+For the app itself I built a mobile-first experience that gives candidates the freedom to interview on a portable device at their own pace. All a candidate has to do to chat with the “AI Interviewer” is hold down record and then hit send.
+
+As for “AI Interviewer”, let’s change that too.
+
+### Hello Amy.
+
+Amy (as in A(m)i) is “AI Interviewer” V2. She operates under a set of laws and principles that make her more competent, professional, and compassionate than “AI Interviewer”. She has more information at her disposal, and she has a generated face which I created with Midjourney.
+
+![Amy interview live example](https://dl.nosaj.io/posts/ai-interviews/amy_interview_2.png)
+
+Amy is the real value of Sprinterview. She is the face of the product. Eventually, Amy could help employers figure out what a good candidate looks like, and even help them decide which candidates are the best post-interview.
+
+## What now?
+
+If you’re interested in testing Sprinterview for yourself just email me on [jason@sprinterview.ai](mailto:jason@sprinterview.ai) for a personal access link.
+
+I’m excited to show this thing to more people and focus on product market fit. With the product I’m exploring how the analysis of interviews will work so that it saves recruiters time and gives candidates the tools to put their best selves forward.
+
+---
+
+I’d love to chat to anyone interested in using Sprinterview or helping out, so if you’re interested, don’t hesitate to reach out via [email](mailto:hi@nosaj.io) or [X](https://twitter.com/nosajio).
+
+Thank you for reading.
