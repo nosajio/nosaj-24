@@ -20,9 +20,11 @@ export default async function PostPage({ params }: PostPage) {
   const { metadata } = post;
   return (
     <article className="container">
-      <div className="text-sm mb-4">{metadata.date}</div>
-      <h1 className="text-4xl font-bold">{metadata.title}</h1>
-      <div className="prose mt-9">
+      <header className="mb-12">
+        <h1 className="text-3xl font-semibold">{metadata.title}</h1>
+      </header>
+      <div className="prose">
+        <div className="mt-4 text-sm text-soot-500">{metadata.date}</div>
         <Body />
       </div>
     </article>
