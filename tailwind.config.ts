@@ -1,3 +1,4 @@
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,10 +9,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
+      },
       container: {
         center: true,
         screens: {
-          lg: "920px",
+          lg: "65ch",
         },
       },
       colors: {
@@ -31,6 +36,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };
 export default config;

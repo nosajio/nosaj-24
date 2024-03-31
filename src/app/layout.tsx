@@ -1,8 +1,11 @@
+import Breadcrumb from "@/components/breadcrumb";
+import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import "./globals.css";
+import Intro from "@/components/intro";
 
 export const metadata: Metadata = {
   title: "~ nosaj",
@@ -15,12 +18,15 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={GeistSans.className}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body>
         <header className="relative w-full">
-          <div className="container p-6 pl-0">
-            <h1 className="font-bold">~ nosaj</h1>
-            <div className="">designer &amp; engineer</div>
+          <div className="container p-6 pb-12 pl-0">
+            <h1 className="flex gap-x-2 font-bold">
+              ~ <Link href="/">nosaj</Link>
+              <Breadcrumb />
+            </h1>
+          <Intro />
           </div>
           <div className="absolute right-0 top-0 flex items-center gap-x-6 p-6">
             <Link href="https://x.com/nosajio" target="_blank">
