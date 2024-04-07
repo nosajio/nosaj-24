@@ -16,30 +16,19 @@ export default function Breadcrumb() {
   }
 
   return paths.map((p, i, arr) => (
-    <div key={p} className="hidden md:flex font-normal">
-      <span className="animate-in fade-in duration-400 mx-1 text-soot-300">
+    <div key={p} className="hidden font-normal md:flex">
+      <span className="duration-400 mx-1 text-soot-300 animate-in fade-in">
         /
       </span>
-      {i === arr.length - 1 ? (
-        <span
-          className="animate-in slide-in-from-left-4 fade-in fill-mode-both duration-400 rounded px-2 text-soot-600"
-          style={{
-            animationDelay: `${(i * 100).toString()}ms`,
-          }}
-        >
-          {p}
-        </span>
-      ) : (
-        <Link
-          className="animate-in slide-in-from-left-4 fade-in fill-mode-both duration-400 rounded px-2 text-soot-600 hover:bg-soot-100 hover:text-soot-900"
-          style={{
-            animationDelay: `${(i * 100).toString()}ms`,
-          }}
-          href={getBreadcrumbUrl(arr, i)}
-        >
-          {p}
-        </Link>
-      )}
+      <Link
+        className="duration-400 rounded px-2 text-soot-600 animate-in fade-in slide-in-from-left-4 fill-mode-both hover:bg-soot-100 hover:text-soot-900"
+        style={{
+          animationDelay: `${(i * 100).toString()}ms`,
+        }}
+        href={getBreadcrumbUrl(arr, i)}
+      >
+        {p}
+      </Link>
     </div>
   ));
 }
