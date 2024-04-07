@@ -1,33 +1,27 @@
-import { type ReactNode } from "react";
-
-interface Project {
-  title: string;
-  summary: string;
-  symbol: ReactNode;
-  note: string;
-}
+import { cn } from "@/lib/utils";
+import { type Project } from "@/projects/project-index";
 
 interface ProjectsProps {
   projects: Project[];
+  className?: string;
 }
 
-export default function Projects({ projects }: Readonly<ProjectsProps>) {
-  const totalRows = Math.ceil(projects.length / 2);
+export default function Projects({
+  projects,
+  className,
+}: Readonly<ProjectsProps>) {
   return (
-    <section className="flex flex-col gap-y-6">
+    <section className={cn("flex flex-col gap-y-6", className)}>
       <h1 className="text-2xl font-bold text-soot-300">Work</h1>
-
-      <div
-        className="flex gap-6 lg:grid lg:grid-cols-2"
-        style={{
-          gridTemplateRows: `repeat(${totalRows.toString()}, 1fr)`,
-        }}
-      >
+      <div className="flex flex-col gap-8">
         {projects.map((p) => (
-          <article className="max-w-96" key={p.title}>
-            <h2 className="mb-2 text-lg font-medium">{p.title}</h2>
-            {p.summary ? <p className="text-soot-800">{p.summary}</p> : null}
-            {p.note ? <p className="text-soot-500">{p.note}</p> : null}
+          <article className="flex gap-4" key={p.title}>
+            {p.symbol}
+            <div>
+              <h2 className=" font-medium">{p.title}</h2>
+              {p.summary ? <p className="text-soot-800">{p.summary}</p> : null}
+              {p.note ? <p className="text-soot-500">{p.note}</p> : null}
+            </div>
           </article>
         ))}
       </div>

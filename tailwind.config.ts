@@ -26,6 +26,11 @@ const config: Config = {
           lg: "0",
         },
       },
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: "calc(var(--radius) - 4px)",
+      },
       colors: {
         soot: {
           "50": "#f7f7f8",

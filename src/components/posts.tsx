@@ -16,8 +16,8 @@ export default function Posts({ posts, max }: Readonly<PostsProps>) {
       <div className="flex flex-col gap-6">
         {displayPosts.map((p) => (
           <Link href={`/posts/${p.slug}`} key={p.title}>
-            <article className="max-w-96">
-              <h2 className="mb-1 text-lg font-medium">{p.title}</h2>
+            <article>
+              <h2 className="text-lg font-medium">{p.title}</h2>
               {p.summary ? <p className="text-soot-500">{p.summary}</p> : null}
             </article>
           </Link>
