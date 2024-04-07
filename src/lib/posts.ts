@@ -1,4 +1,5 @@
 import { glob } from "glob";
+import { FC } from "react";
 import { z, type SafeParseError, type SafeParseSuccess } from "zod";
 
 export const PostHeader = z.object({
@@ -59,4 +60,34 @@ export async function listPosts() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return metas;
+}
+
+export async function listRecommendedPosts(forPost: PostMeta, max = 3) {
+  const posts = await listPosts();
+  return posts.filter((p) => p.slug !== forPost.slug).slice(0, max);
+}
+
+const MDXPostImport = z.object({
+  metadata: PostHeader,
+  default: z.custom<FC>(),
+});
+
+export async function loadPost(slug: string) {
+  try {
+    const file = `@/posts/${slug}.mdx`;
+    const post = await import(file);
+    const { metadata: header, default: Body } = MDXPostImport.parse(post);
+    const metadata: PostMeta = {
+      ...header,
+      file,
+      slug,
+    };
+    return {
+      metadata,
+      Body,
+    };
+  } catch (err) {
+    console.error(err);
+    throw new Error("Post loader error");
+  }
 }
