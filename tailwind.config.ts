@@ -1,4 +1,5 @@
 import typography from "@tailwindcss/typography";
+import animate from 'tailwindcss-animate';
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -16,7 +17,7 @@ const config: Config = {
       container: {
         center: true,
         screens: {
-          lg: "65ch",
+          lg: "920px",
         },
       },
       colors: {
@@ -36,6 +37,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [typography],
+  plugins: [typography, animate],
 };
 export default config;

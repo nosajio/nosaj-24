@@ -56,12 +56,7 @@ module.exports = {
     "lines-around-comment": [
       "warn",
       {
-        beforeLineComment: true,
         beforeBlockComment: true,
-        allowBlockStart: true,
-        allowClassStart: true,
-        allowObjectStart: true,
-        allowArrayStart: true,
       },
     ],
 
@@ -88,7 +83,7 @@ module.exports = {
       rules: {
         "import/no-extraneous-dependencies": [
           "error",
-          { devDependencies: true },
+          { devDependencies: false },
         ],
       },
     },
