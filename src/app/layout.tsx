@@ -34,7 +34,7 @@ export default function RootLayout({
               <h1 className="flex items-center font-semibold">
                 <Link
                   href="/"
-                  className="-ml-2 flex items-center gap-2 rounded px-2 text-soot-600 hover:bg-soot-100 hover:text-soot-900"
+                  className="-ml-2 flex items-center gap-2 rounded px-2 text-soot-600 hover:bg-soot-100 hover:text-soot-900 dark:text-soot-300 hover:dark:bg-soot-900 hover:dark:text-soot-50"
                 >
                   <NosajLogo />
                   nosaj

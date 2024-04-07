@@ -17,11 +17,11 @@ export default function Breadcrumb() {
 
   return paths.map((p, i, arr) => (
     <div key={p} className="hidden font-normal md:flex">
-      <span className="duration-400 mx-1 text-soot-300 animate-in fade-in">
+      <span className="duration-400 mx-1 text-soot-300 animate-in fade-in dark:text-soot-700">
         /
       </span>
       <Link
-        className="duration-400 rounded px-2 text-soot-600 animate-in fade-in slide-in-from-left-4 fill-mode-both hover:bg-soot-100 hover:text-soot-900"
+        className="duration-400 rounded px-2 text-soot-600 animate-in fade-in slide-in-from-left-4 fill-mode-both hover:bg-soot-100 hover:text-soot-900 dark:text-soot-300 hover:dark:bg-soot-900 hover:dark:text-soot-50"
         style={{
           animationDelay: `${(i * 100).toString()}ms`,
         }}

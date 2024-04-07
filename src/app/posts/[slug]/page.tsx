@@ -30,7 +30,7 @@ export default async function PostPage({ params }: PostPage) {
             <li key={p.slug}>
               <Link
                 href={`/posts/${p.slug}`}
-                className="-ml-2 rounded px-2 py-1 text-soot-600 hover:bg-soot-100 hover:text-soot-900"
+                className="-ml-2 rounded px-2 py-1 text-soot-600 hover:bg-soot-100 hover:text-soot-900 dark:text-soot-300 hover:dark:bg-soot-900 hover:dark:text-soot-50"
               >
                 {p.title}
               </Link>

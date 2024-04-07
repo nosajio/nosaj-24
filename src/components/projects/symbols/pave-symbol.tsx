@@ -1,13 +1,8 @@
+import SymbolTile from "./symbol-tile";
+
 export default function PaveSymbol() {
   return (
-    <svg
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="64" height="64" rx="12" fill="white" />
+    <SymbolTile>
       <path
         d="M29.1147 19H20.052C18.3664 19 17 20.378 17 22.0778V27.8388C17 29.5387 18.3664 30.9167 20.052 30.9167H29.1147C30.8003 30.9167 32.1667 29.5387 32.1667 27.8388V22.0778C32.1667 20.378 30.8003 19 29.1147 19Z"
         fill="currentColor"
@@ -24,6 +19,6 @@ export default function PaveSymbol() {
         d="M22.9583 45C26.249 45 28.9167 42.3323 28.9167 39.0417C28.9167 35.7509 26.249 33.0833 22.9583 33.0833C19.6676 33.0833 17 35.7509 17 39.0417C17 42.3323 19.6676 45 22.9583 45Z"
         fill="currentColor"
       />
-    </svg>
+    </SymbolTile>
   );
 }

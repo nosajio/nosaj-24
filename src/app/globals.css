@@ -12,7 +12,13 @@
 
 @layer base {
   body {
-    @apply text-soot-950;
+    @apply bg-white text-soot-950;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      @apply bg-soot-950 text-soot-50;
+    }
   }
 }
 
