@@ -1,5 +1,5 @@
 import { glob } from "glob";
-import { FC } from "react";
+import { type FC } from "react";
 import { z, type SafeParseError, type SafeParseSuccess } from "zod";
 
 export const PostHeader = z.object({

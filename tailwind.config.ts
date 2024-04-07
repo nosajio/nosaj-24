@@ -1,10 +1,10 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+import { type PluginUtils } from "tailwindcss/types/config";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -40,6 +40,33 @@ const config: Config = {
           "950": "#1d1d20",
         },
       },
+      typography: ({ theme }: PluginUtils) => ({
+        soot: {
+          css: {
+            "--tw-prose-body": theme("colors.soot.950"),
+            "--tw-prose-hr": theme("colors.soot.600"),
+            h1: {
+              fontSize: theme("fontSize.3xl"),
+              fontWeight: theme("fontWeight.semibold"),
+            },
+            h2: {
+              fontSize: theme("fontSize.2xl"),
+              fontWeight: theme("fontWeight.semibold"),
+            },
+            h3: {
+              fontSize: theme("fontSize.xl"),
+              fontWeight: theme("fontWeight.semibold"),
+            },
+            h4: {
+              fontSize: theme("fontSize.xl"),
+              fontWeight: theme("fontWeight.medium"),
+            },
+            strong: {
+              fontWeight: theme("fontWeight.semibold"),
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [typography, animate],

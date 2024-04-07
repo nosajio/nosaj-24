@@ -15,16 +15,16 @@ export default async function PostPage({ params }: PostPage) {
   return (
     <article className="container-prose flex flex-col gap-y-12">
       <header>
-        <h1 className="text-3xl font-semibold">{metadata.title}</h1>
+        <h1 className="text-3xl font-bold">{metadata.title}</h1>
         <div className="mt-4 text-sm text-soot-500">
           {format(metadata.date, "MMMM d, yyyy")}
         </div>
       </header>
-      <section className="prose">
+      <section className="prose-soot prose-lg prose-a:underline prose-a:decoration-soot-300 prose-a:underline-offset-2 hover:prose-a:italic prose-blockquote:border-l-2 prose-blockquote:border-l-soot-200 prose-ol:list-decimal prose-ul:list-disc prose-img:rounded-sm">
         <Body />
       </section>
-      <footer>
-        <h1 className="mb-4 text-lg font-semibold">More stuff</h1>
+      <footer className="pt-12 text-lg">
+        <h1 className="mb-4 text-xl font-semibold">More stuff</h1>
         <ul className="flex flex-col gap-2">
           {recommended.map((p) => (
             <li key={p.slug}>
