@@ -1,4 +1,4 @@
-import { PostMeta } from "@/lib/posts";
+import { PostHeader } from "@/lib/posts";
 import { type FC } from "react";
 import { z } from "zod";
 
@@ -9,7 +9,7 @@ interface PostPage {
 }
 
 const MDXPostImport = z.object({
-  metadata: PostMeta,
+  metadata: PostHeader,
   default: z.custom<FC>(),
 });
 
@@ -19,7 +19,7 @@ export default async function PostPage({ params }: PostPage) {
 
   const { metadata } = post;
   return (
-    <article className="container">
+    <article className="container-prose">
       <header className="mb-12">
         <h1 className="text-3xl font-semibold">{metadata.title}</h1>
       </header>

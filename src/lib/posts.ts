@@ -1,7 +1,7 @@
 import { glob } from "glob";
 import { z, type SafeParseError, type SafeParseSuccess } from "zod";
 
-export const PostMeta = z.object({
+export const PostHeader = z.object({
   published: z.boolean().optional(),
   title: z.string(),
   date: z.string(),
@@ -9,13 +9,13 @@ export const PostMeta = z.object({
   cover: z.string().url().optional(),
   summary: z.string().optional(),
 });
-export type PostMeta = z.infer<typeof PostMeta>;
+export type PostHeader = z.infer<typeof PostHeader>;
 
-export const PostMetaExtra = PostMeta.extend({
+export const PostMeta = PostHeader.extend({
   slug: z.string().describe("The filename without the .mdx"),
   file: z.string().describe("The path to the file"),
 });
-export type PostMetaExtra = z.infer<typeof PostMetaExtra>;
+export type PostMeta = z.infer<typeof PostMeta>;
 
 export const POSTS_PATH = "src/posts";
 
@@ -32,28 +32,31 @@ export async function listPosts() {
     ),
   );
 
-  const metas = files
+  const headers = files
     .filter(
       (v): v is PromiseFulfilledResult<[string, { metadata?: unknown }]> =>
         v.status === "fulfilled",
     )
     .map((v): [string, SafeParseSuccess<unknown> | SafeParseError<unknown>] => [
       v.value[0],
-      PostMeta.safeParse(v.value[1].metadata),
+      PostHeader.safeParse(v.value[1].metadata),
     ])
-    .filter((m): m is [string, SafeParseSuccess<PostMeta>] => m[1].success)
+    .filter((m): m is [string, SafeParseSuccess<PostHeader>] => m[1].success)
     .map((m) => ({
       file: m[0],
       ...m[1].data,
     }));
 
-  const extra = metas.map(
-    (m) =>
-      ({
-        slug: getSlug(m.file),
-        ...m,
-      }) as PostMetaExtra,
-  );
+  const metas = headers
+    .map(
+      (m) =>
+        ({
+          slug: getSlug(m.file),
+          ...m,
+        }) as PostMeta,
+    )
+    // Sort by date decending
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return extra;
+  return metas;
 }
