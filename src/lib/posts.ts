@@ -75,7 +75,7 @@ const MDXPostImport = z.object({
 export async function loadPost(slug: string) {
   try {
     const file = `@/posts/${slug}.mdx`;
-    const post = await import(file);
+    const post = await import(`@/posts/${slug}.mdx`);
     const { metadata: header, default: Body } = MDXPostImport.parse(post);
     const metadata: PostMeta = {
       ...header,
