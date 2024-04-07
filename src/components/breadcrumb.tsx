@@ -16,7 +16,7 @@ export default function Breadcrumb() {
   }
 
   return paths.map((p, i, arr) => (
-    <div key={p} className="flex font-normal">
+    <div key={p} className="hidden md:flex font-normal">
       <span className="animate-in fade-in duration-400 mx-1 text-soot-300">
         /
       </span>
