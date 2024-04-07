@@ -8,8 +8,8 @@ import { type ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "~ nosaj",
-  description: "",
+  title: "nosaj.io",
+  description: "Software designer & engineer Jason Howmans' personal site",
 };
 
 export default function RootLayout({
