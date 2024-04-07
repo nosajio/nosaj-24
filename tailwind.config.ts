@@ -1,6 +1,6 @@
 import typography from "@tailwindcss/typography";
-import animate from 'tailwindcss-animate';
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   content: [
@@ -18,6 +18,11 @@ const config: Config = {
         center: true,
         screens: {
           lg: "920px",
+        },
+        padding: {
+          DEFAULT: "1rem",
+          sm: "1rem",
+          lg: "0",
         },
       },
       colors: {
