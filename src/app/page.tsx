@@ -1,10 +1,10 @@
 import Posts from "@/components/posts";
 import Projects from "@/components/projects";
-import { listPosts } from "@/lib/posts";
+import { listPublishedPosts } from "@/lib/posts";
 import projects from "@/projects/project-index";
 
 export default async function Home() {
-  const posts = await listPosts();
+  const posts = await listPublishedPosts();
 
   return (
     <main>

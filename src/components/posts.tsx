@@ -13,10 +13,16 @@ export default function Posts({ posts, max }: Readonly<PostsProps>) {
     <>
       <div className="flex flex-col gap-6">
         {displayPosts.map((p) => (
-          <Link href={`/posts/${p.slug}`} key={p.title}>
+          <Link href={`/posts/${p.slug}`} key={p.title} className="group">
             <article>
-              <h2 className="text-lg font-medium">{p.title}</h2>
-              {p.summary ? <p className="text-soot-500">{p.summary}</p> : null}
+              <h2 className="text-lg font-medium transition dark:group-hover:text-white">
+                {p.title}
+              </h2>
+              {p.summary ? (
+                <p className="text-soot-500 transition group-hover:text-soot-800 dark:group-hover:text-soot-200">
+                  {p.summary}
+                </p>
+              ) : null}
             </article>
           </Link>
         ))}

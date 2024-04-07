@@ -23,8 +23,9 @@ const config: Config = {
         },
         padding: {
           DEFAULT: "1rem",
-          sm: "1rem",
-          lg: "0",
+          md: "1.25rem",
+          lg: "2rem",
+          xl: "0",
         },
       },
       borderRadius: {

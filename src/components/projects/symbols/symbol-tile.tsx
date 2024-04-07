@@ -11,13 +11,10 @@ export default function SymbolTile({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect
-        width="64"
-        height="64"
-        rx="12"
-        className="fill-white animate-in fade-in dark:fill-soot-900"
-      />
-      <g className="origin-center animate-in zoom-in">{children}</g>
+      <rect width="64" height="64" rx="12" className="fill-transparent" />
+      <g className="origin-center animate-in zoom-in dark:text-soot-100">
+        {children}
+      </g>
     </svg>
   );
 }

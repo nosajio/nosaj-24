@@ -1,8 +1,8 @@
 import Posts from "@/components/posts";
-import { listPosts } from "@/lib/posts";
+import { listPublishedPosts } from "@/lib/posts";
 
 export default async function PostsPage() {
-  const posts = await listPosts();
+  const posts = await listPublishedPosts();
 
   return (
     <div className="container">

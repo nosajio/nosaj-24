@@ -62,6 +62,11 @@ export async function listPosts() {
   return metas;
 }
 
+export async function listPublishedPosts() {
+  const posts = await listPosts();
+  return posts.filter((p) => p.published);
+}
+
 export async function listRecommendedPosts(forPost: PostMeta, max = 3) {
   const posts = await listPosts();
   return posts.filter((p) => p.slug !== forPost.slug).slice(0, max);
