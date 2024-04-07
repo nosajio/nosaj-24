@@ -1,4 +1,4 @@
-import PostsGrid from "@/components/posts-grid";
+import Posts from "@/components/posts";
 import { listPosts } from "@/lib/posts";
 
 export default async function PostsPage() {
@@ -6,7 +6,7 @@ export default async function PostsPage() {
 
   return (
     <div className="container">
-      <PostsGrid posts={posts} />
+      <Posts posts={posts} />
     </div>
   );
 }

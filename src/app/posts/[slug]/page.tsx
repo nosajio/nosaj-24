@@ -13,7 +13,7 @@ export default async function PostPage({ params }: PostPage) {
   const recommended = await listRecommendedPosts(metadata);
 
   return (
-    <article className="container-prose flex flex-col gap-y-12">
+    <article className="container flex flex-col gap-y-12">
       <header>
         <h1 className="text-3xl font-bold">{metadata.title}</h1>
         <div className="mt-4 text-sm text-soot-500">

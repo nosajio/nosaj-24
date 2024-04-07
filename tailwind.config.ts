@@ -17,7 +17,8 @@ const config: Config = {
       container: {
         center: true,
         screens: {
-          lg: "920px",
+          // lg: "920px",
+          lg: "65ch",
         },
         padding: {
           DEFAULT: "1rem",
@@ -44,7 +45,9 @@ const config: Config = {
         soot: {
           css: {
             "--tw-prose-body": theme("colors.soot.950"),
-            "--tw-prose-hr": theme("colors.soot.600"),
+            hr: {
+              borderColor: theme("colors.soot.300"),
+            },
             h1: {
               fontSize: theme("fontSize.3xl"),
               fontWeight: theme("fontWeight.semibold"),

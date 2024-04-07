@@ -16,9 +16,4 @@
   }
 }
 
-@layer utilities {
-  .container-prose {
-    @apply mx-auto px-4;
-    max-width: 65ch;
-  }
-}
+/* @layer utilities {} */

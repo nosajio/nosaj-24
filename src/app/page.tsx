@@ -1,4 +1,4 @@
-import PostsGrid from "@/components/posts-grid";
+import Posts from "@/components/posts";
 import { listPosts } from "@/lib/posts";
 
 export default async function Home() {
@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <main>
       <div className="container">
-        <PostsGrid posts={posts} max={3} />
+        <Posts posts={posts} max={3} />
       </div>
     </main>
   );

@@ -2,28 +2,22 @@ import { type PostMeta } from "@/lib/posts";
 import Link from "next/link";
 import { BiChevronRight } from "react-icons/bi";
 
-interface PostsGrid {
+interface PostsProps {
   posts: PostMeta[];
   max?: number;
 }
 
-export default function PostsGrid({ posts, max }: Readonly<PostsGrid>) {
+export default function Posts({ posts, max }: Readonly<PostsProps>) {
   const displayPosts = max !== undefined ? posts.slice(0, max) : posts;
-  const totalRows = Math.ceil(displayPosts.length / 2);
   return (
     <section className="flex flex-col gap-y-6">
       <h1 className="text-2xl font-bold text-soot-300">Posts</h1>
 
-      <div
-        className="flex gap-6 lg:grid lg:grid-cols-2"
-        style={{
-          gridTemplateRows: `repeat(${totalRows.toString()}, 1fr)`,
-        }}
-      >
+      <div className="flex flex-col gap-6">
         {displayPosts.map((p) => (
           <Link href={`/posts/${p.slug}`} key={p.title}>
             <article className="max-w-96">
-              <h2 className="mb-2 text-lg font-medium">{p.title}</h2>
+              <h2 className="mb-1 text-lg font-medium">{p.title}</h2>
               {p.summary ? <p className="text-soot-500">{p.summary}</p> : null}
             </article>
           </Link>
