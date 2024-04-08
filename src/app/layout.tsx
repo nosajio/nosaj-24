@@ -1,5 +1,6 @@
 import Breadcrumb from "@/components/breadcrumb";
 import NosajLogo from "@/components/nosaj";
+import { CSPostHogProvider } from "@/components/providers/posthog-provider";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
@@ -18,46 +19,48 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <head>
-        <link
-          rel="icon"
-          href="/icon?<generated>"
-          type="image/png"
-          sizes="32x32"
-        />
-      </head>
-      <body className="flex min-h-dvh flex-col antialiased">
-        <header className="relative w-full">
-          <div className="flex items-start justify-between p-4 pb-12">
-            <div>
-              <h1 className="flex items-center font-semibold">
-                <Link
-                  href="/"
-                  className="-ml-2 flex items-center gap-2 rounded px-2 text-soot-600 hover:bg-soot-100 hover:text-soot-900 dark:text-soot-300 hover:dark:bg-soot-900 hover:dark:text-soot-50"
-                >
-                  <NosajLogo />
-                  nosaj
+    <CSPostHogProvider>
+      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+        <head>
+          <link
+            rel="icon"
+            href="/icon?<generated>"
+            type="image/png"
+            sizes="32x32"
+          />
+        </head>
+        <body className="flex min-h-dvh flex-col antialiased">
+          <header className="relative w-full">
+            <div className="flex items-start justify-between p-4 pb-12">
+              <div>
+                <h1 className="flex items-center font-semibold">
+                  <Link
+                    href="/"
+                    className="-ml-2 flex items-center gap-2 rounded px-2 text-soot-600 hover:bg-soot-100 hover:text-soot-900 dark:text-soot-300 hover:dark:bg-soot-900 hover:dark:text-soot-50"
+                  >
+                    <NosajLogo />
+                    nosaj
+                  </Link>
+                  <Breadcrumb />
+                </h1>
+              </div>
+              <div className="flex items-center gap-x-6">
+                <Link href="https://x.com/nosajio" target="_blank">
+                  <XLogo />
                 </Link>
-                <Breadcrumb />
-              </h1>
+                <Link href="https://github.com/nosajio" target="_blank">
+                  <GitHubLogo />
+                </Link>
+              </div>
             </div>
-            <div className="flex items-center gap-x-6">
-              <Link href="https://x.com/nosajio" target="_blank">
-                <XLogo />
-              </Link>
-              <Link href="https://github.com/nosajio" target="_blank">
-                <GitHubLogo />
-              </Link>
-            </div>
-          </div>
-        </header>
-        <div className="grow">{children}</div>
-        <footer className="flex w-full flex-row-reverse p-6 pt-12">
-          <span>&copy; {new Date().getFullYear()}</span>
-        </footer>
-      </body>
-    </html>
+          </header>
+          <div className="grow">{children}</div>
+          <footer className="flex w-full flex-row-reverse p-6 pt-12">
+            <span>&copy; {new Date().getFullYear()}</span>
+          </footer>
+        </body>
+      </html>
+    </CSPostHogProvider>
   );
 }
 
