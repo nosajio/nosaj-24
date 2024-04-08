@@ -56,7 +56,7 @@ export default function RootLayout({
           </header>
           <div className="grow">{children}</div>
           <footer className="flex w-full flex-row-reverse p-6 pt-12">
-            <span>&copy; {new Date().getFullYear()}</span>
+            <span className="text-sm text-soot-500">&copy; {new Date().getFullYear()}</span>
           </footer>
         </body>
       </html>
