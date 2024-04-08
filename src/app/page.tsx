@@ -19,7 +19,7 @@ export default async function Home() {
           <h1 className="text-2xl font-bold text-soot-300 dark:text-soot-700">
             Work
           </h1>
-          <Projects projects={projects} />
+          <Projects projects={projects} max={4} />
         </section>
       </div>
     </main>
