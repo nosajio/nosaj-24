@@ -15,7 +15,7 @@ export default function Posts({ posts, max }: Readonly<PostsProps>) {
         {displayPosts.map((p) => (
           <Link href={`/posts/${p.slug}`} key={p.title} className="group">
             <article>
-              <h2 className="text-lg font-medium transition dark:group-hover:text-white">
+              <h2 className="text-lg font-medium transition dark:text-soot-200 dark:group-hover:text-white">
                 {p.title}
               </h2>
               {p.summary ? (

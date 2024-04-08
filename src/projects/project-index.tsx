@@ -1,4 +1,5 @@
 import BBCSymbol from "@/components/projects/symbols/bbc-symbol";
+import BrowserbaseSymbol from "@/components/projects/symbols/browserbase-symbol";
 import FirstminuteSymbol from "@/components/projects/symbols/firstminute-symbol";
 import FrontierSymbol from "@/components/projects/symbols/frontier-symbol";
 import JustALevelSymbol from "@/components/projects/symbols/just-a-level-symbol";
@@ -15,6 +16,12 @@ export interface Project {
 }
 
 const projectIndex: Project[] = [
+  {
+    title: "Browserbase",
+    summary: "Browser automation platform",
+    note: "Present • Design & full-stack",
+    symbol: <BrowserbaseSymbol />,
+  },
   {
     title: "Sprinterview",
     summary: "AI moderated screening interviews",
