@@ -1,0 +1,46 @@
+import leapsDark from "./assets/tailwind/tw-leaps-dark.svg";
+import leapsLight from "./assets/tailwind/tw-leaps-light.svg";
+import swift from "./assets/tailwind/tw-swift.png";
+
+export const metadata = {
+  published: true,
+  title: "Notes on Tailwind",
+  author: "Jason Howmans",
+  date: "13 Apr 2024",
+  summary: "From an engineer with 15 years of large CSS codebase experience",
+};
+
+Well, it's safe to say that Tailwind has made it to the long list of libraries that front-end engineers need to form an opinion on. In this post I'll share my perspective as an engineer working on large CSS codebases since 2009.
+
+Until early 2023 I watched the Tailwind hype taking over the frontend landscape with a healthy dose of skepticism. To me Tailwind was just another tool having its moment in the spotlight before ending up in the CSS junkyard with old friends like Bootstrap.
+
+I've seen a lot of CSS frameworks come and go over the years. I've Bootstrapped sites, made Material UIs, built with Blueprint, yeeted with YUI, and fixed grids with Foundation.
+
+I've gone down the rabbithole with SASS, Less, PostCSS... and then there was the phase of using inline styles (that's right). I've embodied BEM, loved Styled Components for a while, and then Vanilla Extract.
+
+Needless to say, I've been through it.
+
+But after using every one of of these some great, some not great tools, I've always gone back to CSS. The speed and control of raw CSS (I'll include SASS in this) has always won long-term against sexy framework features.
+
+There's something fundamentally different about Tailwind compared with these other tools. The Tailwind API weaves around the philosophy of CSS and web tooling in a way that makes it feel like natural next step in web styling.
+
+In my opinion Tailwind is the closest thing to a perfect CSS framework: It's a complete styling interface that gives 90% of the control of CSS, but with about 25% of the effort – Tailwind makes you a 4x engineer just by running `npm install`.
+
+Tailwind makes web styling work like modern UI frameworks. SwiftUI handles styling beautifully. There's no styling language, it's simply a part of top level component API. When you want a style, you just write it where you need it.
+
+<img {...swift} alt="SwiftUI example" />
+
+You should at least try Tailwind for the productivity boost it will give you. If you're used to working with .css files, you're probably used to adding new styles by first checking the classnames already attached to the element. Then you will open a css file, find or write the selector, and then finally add the style. That's a lot of steps if you just want to add padding to a div.
+
+With Tailwind, you add a style by thinking about the style you want and typing the classname. There's no other steps, systems, or files to think about. Just add the style and move on.
+
+<picture>
+  <source srcset={leapsDark.src} media="(prefers-color-scheme: dark)" />
+  <img {...leapsLight} alt="How to add a style in CSS vs Tailwind" />
+</picture>
+
+Tailwind is still far from perfect, and when V4 lands in 2024 it will improve a lot. But engineers working with large Tailwind codebases will have to work with long classnames, repetition, and tailwind.config growing to hundreds of lines for the forseeable future.
+
+---
+
+I've put a reminder on my calendar to re-visit this topic in a year. I'm all in on Tailwind now, let's see if that changes in the next 365 days :)
