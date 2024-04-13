@@ -20,7 +20,7 @@ export default async function PostPage({ params }: PostPage) {
           {format(metadata.date, "MMMM d, yyyy")}
         </div>
       </header>
-      <section className="prose-soot prose-lg prose-a:underline prose-a:decoration-soot-300 prose-a:underline-offset-2 hover:prose-a:italic prose-blockquote:border-l-2 prose-blockquote:border-l-soot-200 prose-ol:list-decimal prose-ul:list-disc prose-img:rounded-sm">
+      <section className="prose-lg prose-soot prose-a:underline prose-a:decoration-soot-300 prose-a:underline-offset-2 hover:prose-a:italic prose-blockquote:border-l-2 prose-blockquote:border-l-soot-200 prose-ol:list-decimal prose-ul:list-disc prose-img:rounded-sm">
         <Body />
       </section>
       <footer className="pt-12 text-lg">

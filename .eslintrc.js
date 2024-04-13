@@ -1,17 +1,18 @@
 const { resolve } = require("node:path");
 
 const project = resolve(__dirname, "tsconfig.json");
+const resolvedExtends = [
+  "@vercel/style-guide/eslint/node",
+  "@vercel/style-guide/eslint/browser",
+  "@vercel/style-guide/eslint/typescript",
+  "@vercel/style-guide/eslint/react",
+  "@vercel/style-guide/eslint/next",
+].map(require.resolve);
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  extends: [
-    "@vercel/style-guide/eslint/node",
-    "@vercel/style-guide/eslint/browser",
-    "@vercel/style-guide/eslint/typescript",
-    "@vercel/style-guide/eslint/react",
-    "@vercel/style-guide/eslint/next",
-  ].map(require.resolve),
+  extends: ["plugin:mdx/recommended", ...resolvedExtends],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project,
@@ -89,5 +90,4 @@ module.exports = {
     },
   ],
   ignorePatterns: ["node_modules/", "dist/"],
-  plugins: [],
 };

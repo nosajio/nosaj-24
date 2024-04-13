@@ -93,7 +93,7 @@ export async function loadPost(slug: string) {
     };
   } catch (err) {
     console.error(err);
-    console.error('Trying to load post: %s', slug);
+    console.error("Trying to load post: %s", slug);
     throw new Error("Post loader error");
   }
 }

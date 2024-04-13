@@ -1,6 +1,5 @@
 import leapsDark from "./assets/tailwind/tw-leaps-dark.svg";
 import leapsLight from "./assets/tailwind/tw-leaps-light.svg";
-import swift from "./assets/tailwind/tw-swift.png";
 
 export const metadata = {
   published: true,
@@ -28,15 +27,44 @@ In my opinion Tailwind is the closest thing to a perfect CSS framework: It's a c
 
 Tailwind makes web styling work like modern UI frameworks. SwiftUI handles styling beautifully. There's no styling language, it's simply a part of top level component API. When you want a style, you just write it where you need it.
 
-<img {...swift} alt="SwiftUI example" />
+```swift
+import SwiftUI
+
+struct ContentView: View {
+  @State private var color: Color = Color.primary
+
+  var taps: some Gesture {
+    TapGesture()
+      .onEnded {
+        withAnimation {
+          color = Color(red: 1, green: 0.4, blue: 0.1)
+        }
+      }
+  }
+
+  var body: some View {
+    VStack {
+      Rectangle()
+        .foregroundColor(color)
+        .gesture(taps)
+        .popover() { }
+    }
+  }
+}
+```
 
 You should at least try Tailwind for the productivity boost it will give you. If you're used to working with .css files, you're probably used to adding new styles by first checking the classnames already attached to the element. Then you will open a css file, find or write the selector, and then finally add the style. That's a lot of steps if you just want to add padding to a div.
 
 With Tailwind, you add a style by thinking about the style you want and typing the classname. There's no other steps, systems, or files to think about. Just add the style and move on.
 
 <picture>
-  <source srcset={leapsDark.src} media="(prefers-color-scheme: dark)" />
-  <img {...leapsLight} alt="How to add a style in CSS vs Tailwind" />
+  <source srcSet={leapsDark.src} media="(prefers-color-scheme: dark)" />
+  <img
+    src={leapsLight.src}
+    width={leapsLight.width}
+    height={leapsLight.height}
+    alt="How to add a style in CSS vs Tailwind"
+  />
 </picture>
 
 Tailwind is still far from perfect, and when V4 lands in 2024 it will improve a lot. But engineers working with large Tailwind codebases will have to work with long classnames, repetition, and tailwind.config growing to hundreds of lines for the forseeable future.
