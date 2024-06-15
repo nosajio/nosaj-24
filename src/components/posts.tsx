@@ -1,4 +1,4 @@
-import { type PostMeta } from "@/lib/posts";
+import { type postMetaSchema } from "@/lib/posts";
 import Link from "next/link";
 import { BiChevronRight } from "react-icons/bi";
 

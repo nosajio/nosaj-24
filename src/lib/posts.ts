@@ -2,7 +2,7 @@ import { glob } from "glob";
 import { type FC } from "react";
 import { z, type SafeParseError, type SafeParseSuccess } from "zod";
 
-export const PostHeader = z.object({
+export const postHeaderSchema = z.object({
   published: z.boolean().optional(),
   title: z.string(),
   date: z.string(),
@@ -10,13 +10,13 @@ export const PostHeader = z.object({
   cover: z.string().url().optional(),
   summary: z.string().optional(),
 });
-export type PostHeader = z.infer<typeof PostHeader>;
+export type PostHeader = z.infer<typeof postHeaderSchema>;
 
-export const PostMeta = PostHeader.extend({
+export const postMetaSchema = postHeaderSchema.extend({
   slug: z.string().describe("The filename without the .mdx"),
   file: z.string().describe("The path to the file"),
 });
-export type PostMeta = z.infer<typeof PostMeta>;
+export type PostMeta = z.infer<typeof postMetaSchema>;
 
 export const POSTS_PATH = "src/posts";
 
@@ -40,7 +40,7 @@ export async function listPosts() {
     )
     .map((v): [string, SafeParseSuccess<unknown> | SafeParseError<unknown>] => [
       v.value[0],
-      PostHeader.safeParse(v.value[1].metadata),
+      postHeaderSchema.safeParse(v.value[1].metadata),
     ])
     .filter((m): m is [string, SafeParseSuccess<PostHeader>] => m[1].success)
     .map((m) => ({
@@ -72,8 +72,8 @@ export async function listRecommendedPosts(forPost: PostMeta, max = 3) {
   return posts.filter((p) => p.slug !== forPost.slug).slice(0, max);
 }
 
-const MDXPostImport = z.object({
-  metadata: PostHeader,
+const MDXPostImportSchema = z.object({
+  metadata: postHeaderSchema,
   default: z.custom<FC>(),
 });
 
@@ -81,7 +81,7 @@ export async function loadPost(slug: string) {
   try {
     const file = `@/posts/${slug}.mdx`;
     const post = await import(`@/posts/${slug}.mdx`);
-    const { metadata: header, default: Body } = MDXPostImport.parse(post);
+    const { metadata: header, default: Body } = MDXPostImportSchema.parse(post);
     const metadata: PostMeta = {
       ...header,
       file,
